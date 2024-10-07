@@ -1,0 +1,2 @@
+Este es una api realizada con Python en FastApi y SQL lite.
+Para las proximas versiones se utilizaran devcontainers para facilitar su implementacion en todos los equipos de forma rapida, sencilla y automatizada.
