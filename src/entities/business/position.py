@@ -1,8 +1,6 @@
-from enum import Enum
-
 from pydantic import BaseModel
 
 
-class Position(BaseModel, Enum):
+class Position(BaseModel):
     # id: int
     name: str

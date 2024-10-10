@@ -1,6 +1,6 @@
-from sqlalchemy import Column, Integer, String, Float, ForeignKey, Table
-from sqlalchemy.orm import relationship
-from database import Base
+from sqlalchemy import Column, Integer, String
+from core.database.database import Base
+
 
 class DepartmentModel(Base):
     __tablename__ = 'departments'

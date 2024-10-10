@@ -1,6 +1,5 @@
-from sqlalchemy import Column, Integer, String, Float, ForeignKey, Table
-from sqlalchemy.orm import relationship
-from database import Base
+from sqlalchemy import Column, Integer, ForeignKey
+from core.database.database import Base
 
 class EmployeeSoftSkillsModel(Base):
     __tablename__ = 'employee_soft_skills'

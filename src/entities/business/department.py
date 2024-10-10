@@ -1,9 +1,7 @@
-from enum import Enum
-
 from pydantic import BaseModel
 
 
-class Department(BaseModel, Enum):
+class Department(BaseModel):
     # id: str
     name: str
     location: str

@@ -1,2 +1,2 @@
-from entities.business.department import *
-from entities.business.position import *
+from .department import *
+from .position import *
