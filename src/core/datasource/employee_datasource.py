@@ -24,7 +24,7 @@ def createEmployee(
     employee: Employee,
     session: Session) -> dict[str, any]:
     employee_data = employee.model_dump()
-    # employee_data['password'] = pwd_context.hash(employee.password)
+    employee_data['password'] = pwd_context.hash(employee.password)
     
     # contact_info_data = employee_data.pop('contact_info')
     soft_skills_data = employee_data.pop('soft_skills', [])
@@ -71,9 +71,8 @@ def updateEmployee(
         employee_db = employee_data
         session.commit()
         session.refresh(employee_db)
-
-    if not employee_db:
-        raise HTTPException(status_code=404, detail=f"Task with id {id} not found")
+    else:
+        raise HTTPException(status_code=404, detail=f"Employee with id {id} not found")
 
     return employee_db
 
@@ -83,6 +82,6 @@ def deleteEmployee(id: int, session: Session):
         session.delete(employee_db)
         session.commit()
     else:
-        raise HTTPException(status_code=404, detail=f"Task with id {id} not found")
+        raise HTTPException(status_code=404, detail=f"Employee with id {id} not found")
     return None
 

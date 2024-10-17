@@ -10,10 +10,10 @@ class UserService:
         self.user: User | None = None
     
     def get_user_by_email(self, email) -> EmployeeModel | None:
-        with self.session as session:
-            statement = select(EmployeeModel).where(EmployeeModel.email == email)
-            result = session.execute(statement)
-            return result.scalars().first()
+        # with self.session as session:
+        statement = select(EmployeeModel).where(EmployeeModel.email == email)
+        result = self.session.execute(statement)
+        return result.scalars().first()
         
     def set_user(self, user: User):
         self.user = user

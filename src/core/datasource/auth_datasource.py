@@ -7,25 +7,26 @@ import uuid
 
 
 from core.services.user_service import user_service
-from entities.auth.auth_data import * 
+from entities.auth.auth_data import *
+from entities.tables.employee_tables import EmployeeModel 
 
 auth_router = APIRouter(prefix="/auth", tags=["auth"])
 
 
 
 def verify_password(plain_password, hashed_password):
-    return plain_password == hashed_password #pwd_context.verify(plain_password, hashed_password)
+    return pwd_context.verify(plain_password, hashed_password)
 
 
 def get_password_hash(password):
     return pwd_context.hash(password)
 
-def authenticate_user(email: str, password: str):
+def authenticate_user(email: str, password: str) -> EmployeeModel | None:
     user = user_service.get_user_by_email(email=email)
     if not user:
-        return False
+        return None
     if not verify_password(password, user.password):
-        return False
+        return None
     return user
 
 def create_access_token(user_data: dict, expires_delta: timedelta | None = None):
@@ -37,9 +38,9 @@ def create_access_token(user_data: dict, expires_delta: timedelta | None = None)
     ))
     payload['jti'] = str(uuid.uuid4())
     
-    # token = jwt.encode(payload=payload, key=SECRET_KEY, algorithm=ALGORITHM )
+    token = jwt.encode(payload=payload, key=SECRET_KEY, algorithm=ALGORITHM )
    
-    return json.dumps(payload)
+    return token
 
 async def get_current_active_user():
     current_user = user_service.get_user()
