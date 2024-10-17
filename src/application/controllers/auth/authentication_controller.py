@@ -26,17 +26,17 @@ def login_for_access_token(
     user = authenticate_user(login_data.email, login_data.password)
     if not user:
         return Response(status_code=400, content="Incorrect email or password")
-    access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-    access_token = create_access_token(
-        user_data={
-            "email": user.email,
-            "user_id": user.id,
-            "role": "employee"
-            },
-        expires_delta=access_token_expires,
-    )
-    token = Token(access_token=access_token, token_type="bearer")
-    user_service.set_user(user = User(user_data=user, token=token))
+    # access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    # access_token = create_access_token(
+    #     user_data={
+    #         "email": user.email,
+    #         "user_id": user.id,
+    #         "role": "employee"
+    #         },
+    #     expires_delta=access_token_expires,
+    # )
+    # token = Token(access_token=access_token, token_type="bearer")
+    user_service.set_user(user = User(user_data=user))
     
     return Response(content="Login successful") 
 
@@ -59,17 +59,17 @@ def createEmployee(employee: Employee):
     if not user:
         ds.createEmployee(employee, session)
         user = user_service.get_user_by_email(email=employee.email)
-        access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-        access_token = create_access_token(
-            user_data={
-                "email": user.email,
-                "user_id": user.id,
-                "role": "employee"
-                },
-            expires_delta=access_token_expires,
-        )
-        token = Token(access_token=access_token, token_type="bearer")
-        user_service.set_user(user = User(user_data=user, token=token))    
+        # access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+        # access_token = create_access_token(
+        #     user_data={
+        #         "email": user.email,
+        #         "user_id": user.id,
+        #         "role": "employee"
+        #         },
+        #     expires_delta=access_token_expires,
+        # )
+        # token = Token(access_token=access_token, token_type="bearer")
+        user_service.set_user(user = User(user_data=user))    
         return Response(content="User created and logged.")
     else:
         return Response(content="You are already logged. Log out before create an account")

@@ -2,7 +2,7 @@ from typing import List
 from fastapi import Depends, HTTPException
 from entities.employee.employee import Employee, EmployeeUpdate
 from entities.tables import *
-from entities.auth.auth_data import pwd_context
+# from entities.auth.auth_data import pwd_context
 from core.database.database import Base, engine, SessionLocal
 from sqlalchemy.orm import Session
 
@@ -24,7 +24,7 @@ def createEmployee(
     employee: Employee,
     session: Session) -> dict[str, any]:
     employee_data = employee.model_dump()
-    employee_data['password'] = pwd_context.hash(employee.password)
+    # employee_data['password'] = pwd_context.hash(employee.password)
     
     # contact_info_data = employee_data.pop('contact_info')
     soft_skills_data = employee_data.pop('soft_skills', [])

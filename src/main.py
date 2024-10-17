@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.gzip import GZipMiddleware
 from core.database.database import Base, engine
-import application.controllers.employee_controller as emp
-import application.controllers.authentication_controller as auth
+import application.controllers.employee.employee_controller as emp
+import application.controllers.auth.authentication_controller as auth
 
 Base.metadata.create_all(bind = engine)
 
